@@ -1,0 +1,35 @@
+[
+  {
+    "firstName": "Tomek",
+    "lastName": "Rogalski",
+    "age": 39,
+    "history": [
+      {
+        "disease": "cold",
+        "treatment": "Some treatment"
+      }
+    ]
+  },
+  {
+    "firstName": "Max",
+    "lastName": "Schwarzmuller",
+    "age": 29,
+    "history": [
+      {
+        "disease": "cold",
+        "treatment": "Some treatment"
+      }
+    ]
+  },
+  {
+    "firstName": "John",
+    "lastName": "Doe",
+    "age": 48,
+    "history": [
+      {
+        "disease": "yellow fiver",
+        "treatment": "Some treatment"
+      }
+    ]
+  }
+]
