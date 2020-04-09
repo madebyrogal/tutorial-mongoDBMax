@@ -5,6 +5,7 @@ services:
     image: mongo:4.0.11
     volumes:
       - db_data:/data/db
+      - ./dbData:/tmp
     restart: "no"
     ports:
       - 27017:27017
