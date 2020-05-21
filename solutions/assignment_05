@@ -1,0 +1,6 @@
+db.sports.updateOne({title: 'Football'}, {$set: {requiresTeam: true}}, {upsert: true})
+db.sports.updateOne({title: 'Ping-Pong'}, {$set: {requiresTeam: false}}, {upsert: true})
+
+db.sports.updateMany({requiresTeam: true}, {$set: {minPlayers: 10}})
+
+db.sports.updateMany({requiresTeam: true}, {$inc: {minPlayers: 1}})
