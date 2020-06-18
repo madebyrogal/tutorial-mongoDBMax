@@ -1,0 +1,22 @@
+# bash
+# 1. Pick 3 Points on Google Maps and store them in a collection
+db.places.insertOne({name: 'MadeByRogal', location: {type: 'Point', coordinates: [16.98338, 52.27868]}})
+db.places.insertOne({name: 'School', location: {type: 'Point', coordinates: [16.99092, 52.27816]}})
+db.places.insertOne({name: 'Waniliowa 20', location: {type: 'Point', coordinates: [16.98771, 52.27679]}})
+
+# 2. Pick a point and find the nearest points within a min and max distance
+db.places.createIndex({location: '2dsphere'})
+db.places.find({location: {$near: {$geometry: {type: 'Point', coordinates: [16.99187, 52.27424]}, $minDistance: 100, $maxDistance: 410}}})
+
+# 3. Pick an area and see which points (that are stored in your collection) it contains
+const p1 = [16.991882, 52.274325]
+const p2 = [16.992617, 52.279610]
+const p3 = [16.983565, 52.276348]
+db.places.find({location: {$geoWithin: {$geometry: {type: 'Polygon', coordinates: [[p1, p2, p3, p1]]}}}})
+
+# 4. Store at least one area in a different collection
+db.areas.insertOne({name: 'East side of community', area: {type: 'Polygon', coordinates: [[p1, p2, p3, p1]]}})
+
+# 5. Pick a point and find out which areas in your collection contain that point
+db.areas.createIndex({area: '2dsphere'})
+db.areas.find({area: {$geoIntersects: {$geometry: {type: 'Point', coordinates: [16.99092, 52.27816]}}}})
