@@ -1,0 +1,19 @@
+#!bin/bash
+
+# Build pipeline where you find persons older then 50,
+# then group them by gender
+# and find out how many person do you have per gender
+# and average age in the gender.
+# Order the output per gender.
+
+db.persons.aggregate([
+  { $match: { 'dob.age': { $gt: 50 } } },
+  { $group:
+    {
+      _id: '$gender',
+      totalPersons: { $sum: 1 },
+      averageAge: { $avg: '$dob.age' }
+    }
+  },
+  { $sort: { totalPersons: -1 } }
+]).pretty()
