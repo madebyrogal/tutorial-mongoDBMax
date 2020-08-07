@@ -1,0 +1,20 @@
+# Drop all database and users make mongoDB from scratch +
+# Create 3 users
+# - database admin (how can create dbs, collections, indexes etc but not users)
+db.createUser({ user: 'adminDB', pwd: 'adminDB', roles: ['dbAdmin'] })
+
+# - user admin (manage users)
+db.createUser({ user: 'adminUser', pwd: 'adminUser', roles: ['userAdminAnyDatabase'] })
+
+# - user developer (readWrite and 2 dbs - Customers and Sales),
+use admin
+db.auth('adminUser', 'adminUser')
+db.createUser({ user: 'appDev', pwd: 'appDev', roles: [ { role: "readWrite", db: "Customers" }, { role: "readWrite", db: "Sales" } ] })
+
+# Try if the developer user can create items
+db.logout()
+db.auth('appDev', 'appDev')
+use Customers
+db.customers.insertOne({ name: 'Joe Doe' })
+use Sales
+db.sales.insertOne( { product: 'Teddy Bear' } )

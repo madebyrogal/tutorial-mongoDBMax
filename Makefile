@@ -1,6 +1,3 @@
-build:
-    docker-compose --project-name=mongoDBMax build
-
 up:
 	docker-compose --project-name=mongoDBMax up
 
