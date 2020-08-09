@@ -12,6 +12,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: pass
+    command: --sslMode requireSSL --sslPEMKeyFile /tmp/mongodb.pem
 
 volumes:
   db_data:
